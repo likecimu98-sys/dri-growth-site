@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dri-growth-site.sgolovko7.chatgpt.site"),
+  metadataBase: new URL("https://likecimu98-sys.github.io/dri-growth-site/"),
   title: "DRI — рост продаж на маркетплейсах",
   description:
     "Стратегия, аналитика, реклама и контент для прибыльного роста брендов на Ozon, Wildberries и Яндекс Маркете.",
@@ -31,9 +31,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ru_RU",
     siteName: "DRI Agency",
+    url: "https://likecimu98-sys.github.io/dri-growth-site/",
     images: [
       {
-        url: "/og.png",
+        url: "https://likecimu98-sys.github.io/dri-growth-site/og.png",
         width: 1746,
         height: 907,
         alt: "DRI — цифровые решения с измеримым эффектом",
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "DRI — рост на маркетплейсах",
     description: "Стратегия, аналитика и креатив с эффектом в прибыли.",
-    images: ["/og.png"],
+    images: ["https://likecimu98-sys.github.io/dri-growth-site/og.png"],
   },
 };
 
@@ -53,7 +54,7 @@ const organizationSchema = {
   "@type": "ProfessionalService",
   name: "DRI Agency",
   description: "Агентство роста брендов на маркетплейсах",
-  url: "https://dri-growth-site.sgolovko7.chatgpt.site",
+  url: "https://likecimu98-sys.github.io/dri-growth-site/",
   email: "hello@dri.agency",
   areaServed: "RU",
   sameAs: [],

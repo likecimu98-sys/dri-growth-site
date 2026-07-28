@@ -7,6 +7,8 @@ import type {
 } from "react";
 import { motion, useInView } from "framer-motion";
 
+const publicBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const services = [
   {
     num: "01",
@@ -40,7 +42,7 @@ const problems = [
   ["Команда работает без системы", "Введём понятные зоны ответственности, ритм аналитики и контроль результата."],
 ];
 
-const process = [
+const workflowSteps = [
   ["Диагностика", "Разбираем магазин, финансы, ассортимент, рекламу и контент."],
   ["Стратегия", "Фиксируем цели, экономику и сценарий роста на 90 дней."],
   ["Спринты", "Запускаем изменения короткими циклами с еженедельным контролем."],
@@ -353,7 +355,7 @@ export default function Home() {
         </Reveal>
         <Reveal className="featured-case">
           <div className="case-image">
-            <img src="/case-ozon-growth.jpg" alt="Аналитика роста продаж клиента на Ozon" loading="lazy" />
+            <img src={`${publicBase}/case-ozon-growth.jpg`} alt="Аналитика роста продаж клиента на Ozon" loading="lazy" />
             <span className="case-badge">OZON · ТОВАРЫ ДЛЯ ДОМА</span>
           </div>
           <div className="case-story">
@@ -370,11 +372,11 @@ export default function Home() {
         </Reveal>
         <div className="case-grid">
           <Reveal className="mini-case">
-            <img src="/case-ozon-analytics.jpg" alt="Графики аналитики продаж на Ozon" loading="lazy" />
+            <img src={`${publicBase}/case-ozon-analytics.jpg`} alt="Графики аналитики продаж на Ozon" loading="lazy" />
             <div><span>КЕЙС 02 · BEAUTY</span><strong>120 тыс. → 790 тыс. ₽</strong><p>за четыре месяца системной работы</p></div>
           </Reveal>
           <Reveal className="mini-case" delay={0.08}>
-            <img src="/case-wildberries-growth.jpg" alt="График роста продаж магазина" loading="lazy" />
+            <img src={`${publicBase}/case-wildberries-growth.jpg`} alt="График роста продаж магазина" loading="lazy" />
             <div><span>КЕЙС 03 · FASHION</span><strong>+239% к выручке</strong><p>при снижении возвратов до 3,21%</p></div>
           </Reveal>
         </div>
@@ -386,12 +388,12 @@ export default function Home() {
           <h2>Прозрачный путь<br /><span>от данных к результату.</span></h2>
         </Reveal>
         <div className="process-list">
-          {process.map(([title, text], index) => (
+          {workflowSteps.map(([title, text], index) => (
             <Reveal className="process-row" delay={index * 0.05} key={title}>
               <span>0{index + 1}</span>
               <h3>{title}</h3>
               <p>{text}</p>
-              <b>{index === process.length - 1 ? "∞" : "→"}</b>
+              <b>{index === workflowSteps.length - 1 ? "∞" : "→"}</b>
             </Reveal>
           ))}
         </div>
