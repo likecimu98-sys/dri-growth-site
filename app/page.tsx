@@ -353,7 +353,7 @@ export default function Home() {
         </Reveal>
         <Reveal className="featured-case">
           <div className="case-image">
-            <img src="/case-ozon-growth.jpg" alt="Аналитика роста продаж клиента на Ozon" />
+            <img src="/case-ozon-growth.jpg" alt="Аналитика роста продаж клиента на Ozon" loading="lazy" />
             <span className="case-badge">OZON · ТОВАРЫ ДЛЯ ДОМА</span>
           </div>
           <div className="case-story">
@@ -370,11 +370,11 @@ export default function Home() {
         </Reveal>
         <div className="case-grid">
           <Reveal className="mini-case">
-            <img src="/case-ozon-analytics.jpg" alt="Графики аналитики продаж на Ozon" />
+            <img src="/case-ozon-analytics.jpg" alt="Графики аналитики продаж на Ozon" loading="lazy" />
             <div><span>КЕЙС 02 · BEAUTY</span><strong>120 тыс. → 790 тыс. ₽</strong><p>за четыре месяца системной работы</p></div>
           </Reveal>
           <Reveal className="mini-case" delay={0.08}>
-            <img src="/case-wildberries-growth.jpg" alt="График роста продаж магазина" />
+            <img src="/case-wildberries-growth.jpg" alt="График роста продаж магазина" loading="lazy" />
             <div><span>КЕЙС 03 · FASHION</span><strong>+239% к выручке</strong><p>при снижении возвратов до 3,21%</p></div>
           </Reveal>
         </div>
