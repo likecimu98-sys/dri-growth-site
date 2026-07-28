@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dri-growth-site.openai.site"),
+  metadataBase: new URL("https://dri-growth-site.sgolovko7.chatgpt.site"),
   title: "DRI — рост продаж на маркетплейсах",
   description:
     "Стратегия, аналитика, реклама и контент для прибыльного роста брендов на Ozon, Wildberries и Яндекс Маркете.",
@@ -53,7 +53,7 @@ const organizationSchema = {
   "@type": "ProfessionalService",
   name: "DRI Agency",
   description: "Агентство роста брендов на маркетплейсах",
-  url: "https://dri-growth-site.openai.site",
+  url: "https://dri-growth-site.sgolovko7.chatgpt.site",
   email: "hello@dri.agency",
   areaServed: "RU",
   sameAs: [],

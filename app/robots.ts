@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://dri-growth-site.openai.site/sitemap.xml",
+    sitemap: "https://dri-growth-site.sgolovko7.chatgpt.site/sitemap.xml",
   };
 }
