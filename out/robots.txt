@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://likecimu98-sys.github.io/dri-growth-site/sitemap.xml
