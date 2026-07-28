@@ -61,10 +61,12 @@ function Counter({
   value,
   suffix = "",
   prefix = "",
+  decimals = 0,
 }: {
   value: number;
   suffix?: string;
   prefix?: string;
+  decimals?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const visible = useInView(ref, { once: true, margin: "-80px" });
@@ -74,21 +76,25 @@ function Counter({
     if (!visible) return;
     const start = performance.now();
     const duration = 1100;
+    const factor = Math.pow(10, decimals);
     let frame = 0;
     const tick = (now: number) => {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(value * eased));
+      setCount(Math.round(value * factor * eased) / factor);
       if (progress < 1) frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [value, visible]);
+  }, [decimals, value, visible]);
 
   return (
     <span ref={ref}>
       {prefix}
-      {count.toLocaleString("ru-RU")}
+      {count.toLocaleString("ru-RU", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      })}
       {suffix}
     </span>
   );
@@ -106,10 +112,10 @@ function Reveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0.72, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.58, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>
@@ -124,7 +130,7 @@ export default function Home() {
   const [sent, setSent] = useState(false);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setLoaded(true), 900);
+    const timer = window.setTimeout(() => setLoaded(true), 420);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -158,7 +164,7 @@ export default function Home() {
         className="loader"
         initial={false}
         animate={loaded ? { opacity: 0, visibility: "hidden" } : { opacity: 1 }}
-        transition={{ duration: 0.55 }}
+        transition={{ duration: 0.32 }}
         aria-hidden="true"
       >
         <div className="loader-mark">DR<span>I</span></div>
@@ -193,9 +199,9 @@ export default function Home() {
           <i /> Партнёр по росту на маркетплейсах
         </div>
         <motion.h1
-          initial={{ opacity: 0, y: 35 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
         >
           Превращаем продажи
           <br />
@@ -203,9 +209,9 @@ export default function Home() {
         </motion.h1>
         <motion.div
           className="hero-bottom"
-          initial={{ opacity: 0, y: 24 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, delay: 1.15 }}
+          transition={{ duration: 0.65 }}
         >
           <div>
             <p className="hero-copy">
@@ -279,10 +285,22 @@ export default function Home() {
           ))}
         </div>
         <Reveal className="impact-band">
-          <div><strong><Counter value={2.7} suffix="×" /></strong><span>средний рост выручки<br />в проектах DRI</span></div>
-          <div><strong><Counter value={38} prefix="+" suffix="%" /></strong><span>к прибыли за первые<br />90 дней работы</span></div>
-          <div><strong><Counter value={180} suffix=" млн ₽" /></strong><span>дополнительной выручки<br />создано за 2025 год</span></div>
-          <p>Средние данные по активным проектам. Результат зависит от категории и стартовой точки.</p>
+          <div className="impact-stat">
+            <span>01 / ДИНАМИКА</span>
+            <strong><Counter value={2.7} decimals={1} suffix="×" /></strong>
+            <p>средний рост выручки в проектах DRI</p>
+          </div>
+          <div className="impact-stat">
+            <span>02 / ПРИБЫЛЬ</span>
+            <strong><Counter value={38} prefix="+" suffix="%" /></strong>
+            <p>к прибыли за первые 90 дней работы</p>
+          </div>
+          <div className="impact-stat">
+            <span>03 / ЭФФЕКТ</span>
+            <strong><Counter value={180} suffix=" млн ₽" /></strong>
+            <p>дополнительной выручки создано за 2025 год</p>
+          </div>
+          <p className="impact-note">Средние данные по активным проектам. Фактический результат зависит от категории, ассортимента и стартовой точки.</p>
         </Reveal>
       </section>
 
@@ -457,11 +475,11 @@ export default function Home() {
             <form onSubmit={submit}>
               <div className="field">
                 <label htmlFor="name">Ваше имя</label>
-                <input id="name" name="name" placeholder="Как к вам обращаться?" required />
+                <input id="name" name="name" autoComplete="name" placeholder="Как к вам обращаться?" required />
               </div>
               <div className="field">
                 <label htmlFor="phone">Телефон</label>
-                <input id="phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" required />
+                <input id="phone" name="phone" type="tel" autoComplete="tel" inputMode="tel" placeholder="+7 (___) ___-__-__" required />
               </div>
               <div className="field">
                 <label htmlFor="market">Маркетплейс</label>
@@ -497,13 +515,13 @@ export default function Home() {
         </div>
         <div className="footer-links">
           <div><span>НАВИГАЦИЯ</span><a href="#services">Услуги</a><a href="#cases">Кейсы</a><a href="#process">Подход</a></div>
-          <div><span>КОНТАКТЫ</span><a href="mailto:hello@dri.agency">hello@dri.agency</a><a href="tel:+74951234567">+7 495 123-45-67</a><a href="#audit">Telegram ↗</a></div>
+          <div><span>КОНТАКТЫ</span><a href="mailto:hello@dri.agency">hello@dri.agency</a><a href="tel:+74951234567">+7 495 123-45-67</a><a href="mailto:hello@dri.agency?subject=Хочу%20обсудить%20рост">Написать нам ↗</a></div>
         </div>
         <div className="footer-bottom"><span>© 2026 DRI Agency</span><span>Москва · Работаем по всему миру</span><a href="#top">Наверх ↑</a></div>
       </footer>
 
       <a className="floating-cta" href="#audit" aria-label="Получить аудит">
-        <span>Получить<br />аудит</span><b>↗</b>
+        <span>Получить аудит</span><b>↗</b>
       </a>
     </main>
   );
