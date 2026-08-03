@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://likecimu98-sys.github.io/dri-growth-site/og.png",
-        width: 1746,
+        width: 1734,
         height: 907,
         alt: "DRI — цифровые решения с измеримым эффектом",
       },

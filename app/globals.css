@@ -80,6 +80,7 @@ img {
   width: min(100%, var(--max));
   margin: 0 auto;
   padding: clamp(78px, 7vw, 112px) var(--page);
+  scroll-margin-top: 96px;
 }
 
 .loader {
@@ -1618,9 +1619,6 @@ footer {
     display: none;
   }
 
-  .floating-cta {
-    display: flex;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

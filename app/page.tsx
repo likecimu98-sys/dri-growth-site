@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 const publicBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -109,32 +109,10 @@ function Counter({
   prefix?: string;
   decimals?: number;
 }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const visible = useInView(ref, { once: true, margin: "-60px" });
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!visible) return;
-    const start = performance.now();
-    const duration = 900;
-    const factor = Math.pow(10, decimals);
-    let frame = 0;
-
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(value * factor * eased) / factor);
-      if (progress < 1) frame = requestAnimationFrame(tick);
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [decimals, value, visible]);
-
   return (
-    <span ref={ref}>
+    <span>
       {prefix}
-      {count.toLocaleString("ru-RU", {
+      {value.toLocaleString("ru-RU", {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
       })}
