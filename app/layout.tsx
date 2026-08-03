@@ -14,20 +14,21 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://likecimu98-sys.github.io/dri-growth-site/"),
-  title: "DRI — рост продаж на маркетплейсах",
+  title: "DRI — развитие и управление бизнесом на Ozon",
   description:
-    "Стратегия, аналитика, реклама и контент для прибыльного роста брендов на Ozon, Wildberries и Яндекс Маркете.",
+    "Консалтинг, запуск и операционное управление для прибыльного роста бизнеса на Ozon.",
   keywords: [
-    "продвижение на маркетплейсах",
-    "агентство маркетплейсов",
+    "развитие бизнеса на Ozon",
+    "консалтинг Ozon",
+    "управление магазином Ozon",
+    "аудит магазина Ozon",
     "Ozon",
-    "Wildberries",
     "аналитика продаж",
   ],
   openGraph: {
     title: "DRI — цифровые решения с измеримым эффектом",
     description:
-      "Превращаем продажи на маркетплейсах в управляемый и прибыльный рост.",
+      "Строим прибыльный Ozon-бизнес как управляемую систему.",
     type: "website",
     locale: "ru_RU",
     siteName: "DRI Agency",
@@ -43,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DRI — рост на маркетплейсах",
-    description: "Стратегия, аналитика и креатив с эффектом в прибыли.",
+    title: "DRI — развитие бизнеса на Ozon",
+    description: "Консалтинг и управление с измеримым эффектом в прибыли.",
     images: ["https://likecimu98-sys.github.io/dri-growth-site/og.png"],
   },
 };
@@ -52,8 +53,8 @@ export const metadata: Metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "DRI Agency",
-  description: "Агентство роста брендов на маркетплейсах",
+  name: "DRI",
+  description: "Консалтинг и операционное развитие бизнеса на Ozon",
   url: "https://likecimu98-sys.github.io/dri-growth-site/",
   email: "hello@dri.agency",
   areaServed: "RU",
