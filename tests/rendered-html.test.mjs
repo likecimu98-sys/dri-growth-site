@@ -79,6 +79,9 @@ test("keeps production metadata, base-path assets, and clean project structure",
   assert.match(page, /id="contact"/);
   assert.match(page, /id="team-audit"/);
   assert.match(page, /const experts = \[/);
+  assert.match(page, /name: "Рафаэль"[\s\S]*?image: "c977cd58-4e51-4858-8e52-168dd6da2d0f\.jpg"/);
+  assert.match(page, /name: "Данил"[\s\S]*?image: "df63ecdd-479f-42ce-8de2-c5220b549cd6\.jpg"/);
+  assert.match(page, /name: "Илья"[\s\S]*?image: "5d882f9b-f410-4efb-b8f6-7b65d687747d\.jpg"/);
   assert.match(page, /NEXT_PUBLIC_BASE_PATH/);
   assert.match(page, /NEXT_PUBLIC_FORM_ENDPOINT/);
   assert.match(layout, /DRI — развитие действующего бизнеса на Ozon/);
