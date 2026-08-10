@@ -25,37 +25,71 @@ async function render() {
   );
 }
 
-test("server-renders the finished DRI Ozon consulting page", async () => {
+test("server-renders the repositioned DRI Ozon consulting page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>DRI — развитие и управление бизнесом на Ozon<\/title>/i);
-  assert.match(html, /Строим прибыльный/);
-  assert.match(html, /Запуск бизнеса на Ozon/);
-  assert.match(html, /Рост бизнеса на Ozon/);
-  assert.match(html, /Обсудить задачу/);
-  assert.doesNotMatch(html, /Wildberries|Яндекс Маркет|Мегамаркет|KazanExpress/i);
+  const text = html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ");
+
+  assert.match(html, /<title>DRI — развитие действующего бизнеса на Ozon<\/title>/i);
+  assert.match(text, /Увеличиваем прибыль действующего бизнеса на Ozon/);
+  assert.match(text, /Получить аудит бизнеса/);
+  assert.match(text, /Находим, что сдерживает рост/);
+  assert.match(text, /Аудит компетенций команды Ozon/);
+  assert.match(text, /Эксперты DRI/);
+  assert.match(text, /Найдём точки роста вашего бизнеса на Ozon/);
+  assert.match(text, /Получить консультацию/);
+  assert.match(text, /dri\.krd@bk\.ru/);
+
+  assert.doesNotMatch(
+    text,
+    /Запуск бизнеса на Ozon|Новый бизнес|Выбор продукта|Поиск поставщиков|Wildberries|Яндекс Маркет|Мегамаркет|KazanExpress/i,
+  );
+  assert.doesNotMatch(text, /hello@dri\.agency/i);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
-test("keeps production metadata and removes starter artifacts", async () => {
-  const [page, layout, packageJson] = await Promise.all([
+test("renders an accessible contact form and all expert profiles", async () => {
+  const response = await render();
+  const html = await response.text();
+
+  assert.match(html, /<form\b/i);
+  assert.match(html, /name="name"/i);
+  assert.match(html, /name="phone"/i);
+  assert.match(html, /name="company"/i);
+  assert.match(html, /name="ozon_store"/i);
+  assert.match(html, /name="task"/i);
+  assert.match(html, /name="consent"/i);
+  assert.match(html, /aria-live="polite"/i);
+  assert.match(html, /Рафаэль/);
+  assert.match(html, /Данил/);
+  assert.match(html, /Илья/);
+});
+
+test("keeps production metadata, base-path assets, and clean project structure", async () => {
+  const [page, layout, packageJson, nextConfig] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../next.config.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /id="contact"/);
-  assert.match(page, /className="impact-band"/);
-  assert.match(page, /className="audience-grid"/);
-  assert.match(layout, /DRI — развитие и управление бизнесом на Ozon/);
+  assert.match(page, /id="team-audit"/);
+  assert.match(page, /const experts = \[/);
+  assert.match(page, /NEXT_PUBLIC_BASE_PATH/);
+  assert.match(page, /NEXT_PUBLIC_FORM_ENDPOINT/);
+  assert.match(layout, /DRI — развитие действующего бизнеса на Ozon/);
+  assert.match(layout, /dri\.krd@bk\.ru/);
   assert.match(layout, /application\/ld\+json/);
-  assert.doesNotMatch(`${page}\n${layout}`, /Wildberries|Яндекс Маркет|Мегамаркет|KazanExpress/i);
+  assert.match(nextConfig, /basePath/);
+  assert.doesNotMatch(
+    `${page}\n${layout}`,
+    /Wildberries|Яндекс Маркет|Мегамаркет|KazanExpress/i,
+  );
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
 
-  await assert.rejects(
-    access(new URL("app/_sites-preview", templateRoot)),
-  );
+  await assert.rejects(access(new URL("app/_sites-preview", templateRoot)));
 });

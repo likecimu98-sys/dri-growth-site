@@ -12,41 +12,47 @@ const geistMono = Geist_Mono({
   subsets: ["latin", "cyrillic"],
 });
 
+const siteUrl = "https://dri-growth-site.sgolovko7.chatgpt.site/";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://likecimu98-sys.github.io/dri-growth-site/"),
-  title: "DRI — развитие и управление бизнесом на Ozon",
+  metadataBase: new URL(siteUrl),
+  title: "DRI — развитие действующего бизнеса на Ozon",
   description:
-    "Консалтинг, запуск и операционное управление для прибыльного роста бизнеса на Ozon.",
+    "Помогаем владельцам действующих магазинов на Ozon увеличивать прибыль через аудит, аналитику, оценку команды и внедрение системных бизнес-процессов.",
   keywords: [
     "развитие бизнеса на Ozon",
     "консалтинг Ozon",
-    "управление магазином Ozon",
     "аудит магазина Ozon",
-    "Ozon",
-    "аналитика продаж",
+    "аудит команды Ozon",
+    "аналитика продаж Ozon",
+    "управление бизнесом на Ozon",
   ],
+  alternates: {
+    canonical: siteUrl,
+  },
   openGraph: {
-    title: "DRI — цифровые решения с измеримым эффектом",
+    title: "DRI — системное развитие бизнеса на Ozon",
     description:
-      "Строим прибыльный Ozon-бизнес как управляемую систему.",
+      "Находим точки роста, оцениваем эффективность команды, выстраиваем процессы и помогаем увеличить прибыль действующего магазина на Ozon.",
     type: "website",
     locale: "ru_RU",
-    siteName: "DRI Agency",
-    url: "https://likecimu98-sys.github.io/dri-growth-site/",
+    siteName: "DRI",
+    url: siteUrl,
     images: [
       {
-        url: "https://likecimu98-sys.github.io/dri-growth-site/og.png",
+        url: "/og.png",
         width: 1734,
         height: 907,
-        alt: "DRI — цифровые решения с измеримым эффектом",
+        alt: "DRI — системное развитие действующего бизнеса на Ozon",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DRI — развитие бизнеса на Ozon",
-    description: "Консалтинг и управление с измеримым эффектом в прибыли.",
-    images: ["https://likecimu98-sys.github.io/dri-growth-site/og.png"],
+    title: "DRI — системное развитие бизнеса на Ozon",
+    description:
+      "Находим точки роста, оцениваем команду и выстраиваем процессы для увеличения прибыли действующего магазина на Ozon.",
+    images: ["/og.png"],
   },
 };
 
@@ -54,11 +60,18 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "DRI",
-  description: "Консалтинг и операционное развитие бизнеса на Ozon",
-  url: "https://likecimu98-sys.github.io/dri-growth-site/",
-  email: "hello@dri.agency",
+  description:
+    "Консалтинговая компания по системному развитию действующего бизнеса на Ozon",
+  url: siteUrl,
+  email: "dri.krd@bk.ru",
   areaServed: "RU",
-  sameAs: [],
+  knowsAbout: [
+    "Аудит бизнеса на Ozon",
+    "Аналитика Ozon",
+    "Аудит компетенций команды Ozon",
+    "Операционное управление",
+    "Автоматизация бизнес-процессов",
+  ],
 };
 
 export default function RootLayout({
